@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: test
+  http:
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+tailMall:
+  api-package: online.loopcode.tailmall
