@@ -7,7 +7,6 @@ spring:
     username: root
     password: newpassword
   jpa:
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: true
+    hibernate:
+      ddl-auto: create-drop
+

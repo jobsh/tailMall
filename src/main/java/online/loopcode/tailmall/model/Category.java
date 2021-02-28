@@ -4,7 +4,7 @@
  * @开源项目 $ http://talelin.com
  * @免费专栏 $ http://course.talelin.com
  * @我的课程 $ http://imooc.com/t/4294850
- * @创建时间 2020-02-17 17:50
+ * @创建时间 2019-07-15 01:39
  */
 package online.loopcode.tailmall.model;
 
@@ -18,17 +18,28 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-//where delete_time == null
-@Where(clause = "delete_time is null ")
-public class Banner extends BaseEntity {
+@Where(clause = "delete_time is null and online = 1")
+public class Category extends BaseEntity {
+
     @Id
     private Long id;
+
     private String name;
+
     private String description;
-    private String title;
+
+    private Boolean isRoot;
+
     private String img;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name="bannerId")
-    private List<BannerItem> items;
+    private Long parentId;
+
+    private Long index;
+
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(name = "coupon_category",
+//            joinColumns = @JoinColumn(name = "category_id"),
+//            inverseJoinColumns = @JoinColumn(name = "coupon_id"))
+//    private List<Coupon> couponList;
+
 }

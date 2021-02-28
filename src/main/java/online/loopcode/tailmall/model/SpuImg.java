@@ -4,7 +4,7 @@
  * @开源项目 $ http://talelin.com
  * @免费专栏 $ http://course.talelin.com
  * @我的课程 $ http://imooc.com/t/4294850
- * @创建时间 2020-02-17 19:47
+ * @创建时间 2020-02-24 20:31
  */
 package online.loopcode.tailmall.model;
 
@@ -17,12 +17,12 @@ import javax.persistence.Id;
 @Entity
 @Getter
 @Setter
-public class BannerItem extends BaseEntity {
+public class SpuImg extends BaseEntity {
     @Id
     private Long id;
+
     private String img;
-    private String keyword;
-    private short type;
-    private Long bannerId;
-    private String name;
+
+    private Long spuId;
 }
+

@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: test
+    active: dev
   http:
     encoding:
       charset: utf-8
@@ -8,6 +8,14 @@ spring:
       force: true
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    open-in-view: off
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
 tailMall:
-  api-package: online.loopcode.tailmall
+  api-package: online.loopcode.tailmall.api
