@@ -16,6 +16,9 @@ spring:
     open-in-view: off
   jackson:
     property-naming-strategy: SNAKE_CASE
-
+  devtools:
+    livereload:
+      port: 35731
 tailMall:
   api-package: online.loopcode.tailmall.api
+

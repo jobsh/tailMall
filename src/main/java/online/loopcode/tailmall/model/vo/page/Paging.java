@@ -19,10 +19,15 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class Paging<T> {
+    /* 总条数 */
     private Long total;
+    /* 每页条数 */
     private Integer count;
+    /* 当前页码 */
     private Integer page;
+    /* 总页数 */
     private Integer totalPage;
+    /* 数据 */
     private List<T> items;
 
     public Paging(Page<T> pageT) {

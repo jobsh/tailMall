@@ -36,6 +36,9 @@ public class Category extends BaseEntity {
 
     private Long index;
 
+    /**
+     * 如果配置了双向的关系，一定要有选择地序列化，避免循环序列化问题的产生
+     */
 //    @ManyToMany(fetch = FetchType.LAZY)
 //    @JoinTable(name = "coupon_category",
 //            joinColumns = @JoinColumn(name = "category_id"),
