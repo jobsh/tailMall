@@ -46,6 +46,9 @@ public class Sku extends BaseEntity {
         return discountPrice == null ? this.price : this.discountPrice;
     }
 
+    /**
+     * @return 获取完整的sku list
+     */
     public List<Spec> getSpecs() {
         if (this.specs == null) {
             return Collections.emptyList();
@@ -60,6 +63,9 @@ public class Sku extends BaseEntity {
         this.specs = GenericAndJson.objectToJson(specs);
     }
 
+    /**
+     * @return 获取spec value集合
+     */
     @JsonIgnore
     public List<String> getSpecValueList() {
         return this.getSpecs().stream().map(Spec::getValue).collect(Collectors.toList());

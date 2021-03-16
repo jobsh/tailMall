@@ -148,9 +148,7 @@ public class OrderService {
                     .orElseThrow(() -> new NotFoundException(50006));
             couponChecker = new CouponChecker(coupon, iMoneyDiscount);
         }
-        OrderChecker orderChecker = new OrderChecker(
-                orderDTO, serverSkuList, couponChecker, this.maxSkuLimit
-        );
+        OrderChecker orderChecker = new OrderChecker(orderDTO, serverSkuList, couponChecker, this.maxSkuLimit);
         orderChecker.isOK();
         return orderChecker;
     }

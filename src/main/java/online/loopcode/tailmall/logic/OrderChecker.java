@@ -22,14 +22,14 @@ import java.util.List;
 
 public class OrderChecker {
 
-    private OrderDTO orderDTO;
+    private final OrderDTO orderDTO;
     @Getter
-    private List<Sku> serverSkuList;
-    private CouponChecker couponChecker;
-    private Integer maxSkuLimit;
+    private final List<Sku> serverSkuList;
+    private final CouponChecker couponChecker;
+    private final Integer maxSkuLimit;
 
     @Getter
-    private List<OrderSku> orderSkuList = new ArrayList<>();
+    private final List<OrderSku> orderSkuList = new ArrayList<>();
 
     public OrderChecker(OrderDTO orderDTO, List<Sku> serverSkuList,
                         CouponChecker couponChecker, Integer maxSkuLimit) {

@@ -46,13 +46,14 @@ public class Order extends BaseEntity {
     private String orderNo;
     private Long userId;
     private BigDecimal totalPrice;
+    /** 所有sku数量和 */
     private Long totalCount;
     private String snapImg;
     private String snapTitle;
     private Date expiredTime;
     private Date placedTime;
 
-    // 订单sku信息
+    // 订单sku信息，OrderSku => list => serialize => snapItems
     private String snapItems;
 
     private String snapAddress;

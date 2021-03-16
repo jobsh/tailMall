@@ -1,10 +1,5 @@
 /**
- * @作者 7七月
- * @微信公号 林间有风
- * @开源项目 $ http://talelin.com
- * @免费专栏 $ http://course.talelin.com
- * @我的课程 $ http://imooc.com/t/4294850
- * @创建时间 2020-03-27 15:34
+ * @desc: 对应Order的 snapItems 的 item（sku）
  */
 package online.loopcode.tailmall.model;
 
@@ -22,9 +17,13 @@ import java.util.List;
 public class OrderSku {
     private Long id;
     private Long spuId;
+    /** sku单价 * 当前sku数量 */
     private BigDecimal finalPrice;
+    /** sku单价 */
     private BigDecimal singlePrice;
+    /** 当前sku规格值 */
     private List<String> specValues;
+    /** 购买的此sku的数量 */
     private Integer count;
     private String img;
     private String title;
