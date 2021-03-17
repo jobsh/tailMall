@@ -94,16 +94,15 @@ public class OrderService {
         order.setSnapItems(orderChecker.getOrderSkuList());
 
         this.orderRepository.save(order);
+        //reduceStock 扣减库存，用到数据库的乐观锁思想
         this.reduceStock(orderChecker);
-        //reduceStock
         //核销优惠券
-        //加入到延迟消息队列
-
         Long couponId = -1L;
         if (orderDTO.getCouponId() != null) {
             this.writeOffCoupon(orderDTO.getCouponId(), order.getId(), uid);
             couponId = orderDTO.getCouponId();
         }
+        //加入到延迟消息队列
         this.sendToRedis(order.getId(), uid, couponId);
         return order.getId();
     }
@@ -212,7 +211,12 @@ public class OrderService {
         order.orElseThrow(() -> new ParameterException(10007));
     }
 
-
+    /**
+     * 优惠券核销
+     * @param couponId
+     * @param oid
+     * @param uid
+     */
     private void writeOffCoupon(Long couponId, Long oid, Long uid) {
         int result = this.userCouponRepository.writeOff(couponId, oid, uid);
         if (result != 1) {

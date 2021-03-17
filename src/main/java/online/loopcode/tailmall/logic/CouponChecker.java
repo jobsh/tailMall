@@ -43,20 +43,21 @@ public class CouponChecker {
     }
 
     //Mark
-    public void finalTotalPriceIsOk(List<SkuOrderBO> skuOrderBOList, BigDecimal orderFinalTotalPrice,
-                                    BigDecimal serverTotalPrice) {
+    public void finalTotalPriceIsOk(BigDecimal orderFinalTotalPrice,
+                                    BigDecimal serverTotalPrice, BigDecimal orderCategoryPrice) {
         BigDecimal serverFinalTotalPrice;
 
         switch (CouponType.toType(this.coupon.getType())) {
             case FULL_MINUS:
             case NO_THRESHOLD_MINUS:
+                // 由于已经判断了，优惠券的使用条件，这里直接减优惠金额即可
                 serverFinalTotalPrice = serverTotalPrice.subtract(this.coupon.getMinus());
                 if (serverFinalTotalPrice.compareTo(new BigDecimal("0")) <= 0) {
                     throw new ForbiddenException(50008);
                 }
                 break;
             case FULL_OFF:
-                BigDecimal orderCategoryPrice = this.canBeUsed(skuOrderBOList, serverTotalPrice);
+//                BigDecimal orderCategoryPrice = this.canBeUsed(skuOrderBOList, serverTotalPrice);
                 BigDecimal discountPrice = this.iMoneyDiscount.discount(orderCategoryPrice,  new BigDecimal(1).subtract(this.coupon.getRate()));
                 serverFinalTotalPrice = serverTotalPrice.subtract(discountPrice);
                 break;
@@ -87,6 +88,10 @@ public class CouponChecker {
         return orderCategoryPrice;
     }
 
+    /**
+     * 主要用来判断满减券和满减折扣券的是否达到使用金额条件
+     * @param orderCategoryPrice
+     */
     private void couponCanBeUsed(BigDecimal orderCategoryPrice) {
         switch (CouponType.toType(this.coupon.getType())){
             case FULL_OFF:
@@ -112,6 +117,12 @@ public class CouponChecker {
         return sum;
     }
 
+    /**
+     *
+     * @param skuOrderBOList
+     * @param cid coupon可使用的某一个cid
+     * @return
+     */
     private BigDecimal getSumByCategory(List<SkuOrderBO> skuOrderBOList, Long cid) {
         BigDecimal sum = skuOrderBOList.stream()
                 .filter(sku -> sku.getCategoryId().equals(cid))

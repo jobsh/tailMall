@@ -57,14 +57,17 @@ public class OrderChecker {
             this.orderSkuList.add(new OrderSku(serverSku, skuInfoDTO));
         }
 
-        // 前后端最终价格是否一致
+        // 前后端sku总价格是否一致
         this.totalPriceIsOk(orderDTO.getTotalPrice(), serverTotalPrice);
 
+        // 如果使用了优惠券，则对优惠券进行校验
         if (this.couponChecker != null) {
             // 如果有优惠券则需要验证最终价格
             this.couponChecker.isOk();
-            this.couponChecker.canBeUsed(skuOrderBOList, serverTotalPrice);
-            this.couponChecker.finalTotalPriceIsOk(skuOrderBOList, orderDTO.getFinalTotalPrice(), serverTotalPrice);
+            // 订单金额够不够优惠券使用资格，主要针对满减券（包括满减折扣券和满减券）
+            BigDecimal orderCategoryPrice = this.couponChecker.canBeUsed(skuOrderBOList, serverTotalPrice);
+            // 前后端最终价格是否一致，serverTotalPrice - 优惠券的优惠了多少钱 = serverFianalTotalPrice
+            this.couponChecker.finalTotalPriceIsOk(orderDTO.getFinalTotalPrice(), serverTotalPrice, orderCategoryPrice);
         } else {
             if (orderDTO.getFinalTotalPrice()
                     .compareTo(serverTotalPrice) != 0) {
@@ -84,7 +87,7 @@ public class OrderChecker {
         }
     }
 
-
+    // 订单中每件sku的总价，用sku实际价格 * 当前sku数量
     private BigDecimal calculateSkuOrderPrice(Sku serverSku, SkuInfoDTO skuInfoDTO) {
         if (skuInfoDTO.getCount() <= 0) {
             throw new ParameterException(50007);
