@@ -13,6 +13,7 @@ import lombok.*;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Map;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -41,13 +42,13 @@ public class User extends BaseEntity {
 
     private Long unifyUid;
 
-//    private String group;
+    private String group;
 
-//    @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinTable(name = "UserCoupon",
-//            joinColumns = @JoinColumn(name = "userId"),
-//            inverseJoinColumns = @JoinColumn(name = "couponId"))
-//    private List<Coupon> couponList;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "UserCoupon",
+            joinColumns = @JoinColumn(name = "userId"),
+            inverseJoinColumns = @JoinColumn(name = "couponId"))
+    private List<Coupon> couponList;
 
 
 

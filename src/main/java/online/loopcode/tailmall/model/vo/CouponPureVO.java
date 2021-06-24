@@ -1,11 +1,3 @@
-/**
- * @作者 7七月
- * @微信公号 林间有风
- * @开源项目 $ http://talelin.com
- * @免费专栏 $ http://course.talelin.com
- * @我的课程 $ http://imooc.com/t/4294850
- * @创建时间 2019-08-10 21:01
- */
 package online.loopcode.tailmall.model.vo;
 
 import online.loopcode.tailmall.model.Coupon;

@@ -1,24 +1,8 @@
 spring:
   profiles:
     active: dev
-  http:
-    encoding:
-      charset: utf-8
-      enabled: true
-      force: true
-  jpa:
-    hibernate:
-      ddl-auto: none
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: true
-    open-in-view: off
-  jackson:
-    property-naming-strategy: SNAKE_CASE
-  devtools:
-    livereload:
-      port: 35731
-tailMall:
-  api-package: online.loopcode.tailmall.api
 
+wx:
+  code2session: https://api.weixin.qq.com/sns/jscode2session
+  appid: wxceb307861f3bff18
+  appsecret: 15645883ad1c1e77c8dd840472cd0a7f

@@ -1,11 +1,3 @@
-/**
- * @作者 7七月
- * @微信公号 林间有风
- * @开源项目 $ http://talelin.com
- * @免费专栏 $ http://course.talelin.com
- * @我的课程 $ http://imooc.com/t/4294850
- * @创建时间 2020-03-15 04:51
- */
 package online.loopcode.tailmall.core.interceptors;
 
 import com.auth0.jwt.interfaces.Claim;
@@ -38,6 +30,7 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Optional<ScopeLevel> scopeLevel = this.getScopeLevel(handler);
+        // 不存在该注解，放行
         if (!scopeLevel.isPresent()) {
             return true;
         }

@@ -1,6 +1,3 @@
-/**
- * @desc: 对应Order的 snapItems 的 item（sku）
- */
 package online.loopcode.tailmall.model;
 
 import lombok.Getter;
